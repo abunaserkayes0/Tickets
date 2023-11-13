@@ -1,8 +1,8 @@
-async function getTicket(slug: any) {
-  const res = await fetch("http://localhost:7000/tickets/" + slug, {
-    next: {
-      revalidate: 15,
-    },
+import { error } from "console";
+
+async function getTicket(id: any) {
+  const res = await fetch(`http://localhost:7000/tickets/${id}`, {
+    next: { revalidate: 30 },
   });
   return res.json();
 }
@@ -10,12 +10,9 @@ async function getTicket(slug: any) {
 export default async function TicketsDetails({
   params,
 }: {
-  params: { slug: string };
+  params: { id: number };
 }) {
-  const { slug } = params;
-  const data = await getTicket(slug);
-  console.log(data);
-
+  const data = await getTicket(params.id);
   return (
     <main>
       <nav>

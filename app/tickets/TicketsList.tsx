@@ -1,3 +1,6 @@
+import Link from "next/link";
+import React from "react";
+
 async function getTickets() {
   const res = await fetch("http://localhost:7000/tickets", {
     next: {
@@ -7,12 +10,8 @@ async function getTickets() {
   return res.json();
 }
 
-import Link from "next/link";
-import React from "react";
-
 export default async function TicketsList() {
   const tickets = await getTickets();
-
   return (
     <>
       {tickets.map((ticket: any) => (
